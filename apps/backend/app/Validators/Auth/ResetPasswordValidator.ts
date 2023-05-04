@@ -27,6 +27,7 @@ export default class ResetPasswordValidator {
     password: schema.string([
       rules.trim(),
       rules.confirmed(),
+      rules.minLength(4),
       rules.maxLength(255),
     ]),
   });

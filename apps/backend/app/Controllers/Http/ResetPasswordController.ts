@@ -72,6 +72,7 @@ export default class ResetPasswordController {
     const { password } = await request.validate(ResetPasswordValidator);
 
     user.password = password;
+    user.resetPassword = false;
     await user.save();
 
     return response.ok({ valid: true });

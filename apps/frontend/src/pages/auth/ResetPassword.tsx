@@ -56,6 +56,10 @@ export function ResetPassword() {
             control={control}
             rules={{
               required: "Mot de passe requis",
+              minLength: {
+                value: 4,
+                message: "Mot de passe trop court (min 4 caractères)",
+              },
             }}
           />
         </Grid>
