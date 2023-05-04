@@ -7,8 +7,8 @@ const UserSchema = z.object({
     .object({
       id: z.number().int(),
       email: z.string(),
-      createdAt: z.string().datetime(),
-      updatedAt: z.string().datetime(),
+      createdAt: z.string(),
+      updatedAt: z.string(),
     })
     .nullable(),
 });

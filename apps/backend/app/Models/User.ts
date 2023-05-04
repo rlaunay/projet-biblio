@@ -1,8 +1,9 @@
 import { DateTime } from "luxon";
 import Hash from "@ioc:Adonis/Core/Hash";
-import { column, beforeSave, BaseModel } from "@ioc:Adonis/Lucid/Orm";
+import { column, beforeSave } from "@ioc:Adonis/Lucid/Orm";
+import AppBaseModel from "App/Models/AppBaseModel";
 
-export default class User extends BaseModel {
+export default class User extends AppBaseModel {
   @column({ isPrimary: true })
   public id: number;
 
@@ -11,6 +12,9 @@ export default class User extends BaseModel {
 
   @column({ serializeAs: null })
   public password: string;
+
+  @column({ serializeAs: null })
+  public resetPassword: boolean;
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime;

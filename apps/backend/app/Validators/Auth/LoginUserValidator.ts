@@ -39,5 +39,10 @@ export default class LoginUserValidator {
    * }
    *
    */
-  public messages: CustomMessages = {};
+  public messages: CustomMessages = {
+    "email.maxLength": "Email trop long (pas dépasser 255 caractères)",
+    "email.email": "Email invalid",
+    "password.maxLength":
+      "Mot de passe trop long (pas dépasser 255 caractères)",
+  };
 }

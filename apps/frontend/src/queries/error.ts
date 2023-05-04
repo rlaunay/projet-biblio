@@ -3,7 +3,7 @@ type ValidationError = {
     rule: string;
     field: string;
     message: string;
-  };
+  }[];
 };
 
 export function isValidationError(obj: any): obj is ValidationError {

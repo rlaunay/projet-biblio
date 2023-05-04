@@ -17,10 +17,13 @@ async function request<T>(path: string, config: RequestInit): Promise<T> {
 
   console.log(finalPath);
 
+  const token = localStorage.getItem("token");
+
   const request = new Request(finalPath, {
     ...config,
     headers: {
       "Content-Type": "application/json",
+      Authorization: token === null ? "" : `Bearer ${token}`,
       ...config.headers,
     },
   });
@@ -46,10 +49,7 @@ async function post<T, U>(
   body: U,
   config?: RequestInit
 ): Promise<T> {
-  const init =
-    body instanceof FormData
-      ? { method: "POST", ...body, ...config }
-      : { method: "POST", body: JSON.stringify(body), ...config };
+  const init = { method: "POST", body: JSON.stringify(body), ...config };
   return await request<T>(path, init);
 }
 

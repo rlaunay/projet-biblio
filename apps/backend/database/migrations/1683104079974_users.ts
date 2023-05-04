@@ -8,6 +8,7 @@ export default class extends BaseSchema {
       table.increments("id").primary();
       table.string("email", 255).notNullable().unique();
       table.string("password", 180).notNullable();
+      table.boolean("resetPassword").notNullable().defaultTo(false);
 
       /**
        * Uses timestampz for PostgreSQL and DATETIME2 for MSSQL

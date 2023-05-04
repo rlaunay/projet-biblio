@@ -26,5 +26,12 @@ Route.group(() => {
     Route.post("/login", "AuthController.login");
     Route.post("/register", "AuthController.register");
     Route.delete("/logout", "AuthController.logout");
+
+    Route.post("/forgot-password", "ResetPasswordController.sendResetMail");
+    Route.get("/reset/password/:key", "ResetPasswordController.index").as(
+      "resetPassword"
+    );
+
+    Route.post("/reset/password/:key", "ResetPasswordController.store");
   }).prefix("/auth");
 }).prefix("/api");

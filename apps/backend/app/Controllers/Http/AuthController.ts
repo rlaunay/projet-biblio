@@ -22,10 +22,10 @@ export default class AuthController {
     const user = await User.create(payload);
 
     const token = await auth.use("api").generate(user);
-    return response.created({ token, user });
+    return response.created({ token: token.token, user });
   }
-
   public async logout({ auth, response }: HttpContextContract) {
+    await auth.use("api").authenticate();
     await auth.use("api").revoke();
     return response.ok({ message: "Déconnexion réussit" });
   }

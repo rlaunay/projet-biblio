@@ -11,6 +11,10 @@ export function AuthLayout() {
     return <Navigate to="/" />;
   }
 
+  if (pathname === "/auth" || pathname === "/auth/") {
+    return <Navigate to="/auth/login" />;
+  }
+
   return (
     <Container component="main" maxWidth="xs">
       <Box

@@ -4,9 +4,10 @@ import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/queries/client";
 import { isMessageError, isValidationError } from "@/queries/error";
 
-export type LoginPayload = {
+export type RegisterPayload = {
   email: string;
   password: string;
+  password_confirmation: string;
 };
 
 const AuthSchema = z.object({
@@ -19,14 +20,14 @@ const AuthSchema = z.object({
   token: z.string(),
 });
 
-async function login(payload: LoginPayload) {
-  const res = await http.post("/auth/login", payload);
+async function register(payload: RegisterPayload) {
+  const res = await http.post("/auth/register", payload);
   return AuthSchema.parse(res);
 }
 
-export function useLogin() {
+export function useRegister() {
   const { mutate, error, isLoading } = useMutation({
-    mutationFn: login,
+    mutationFn: register,
     onSuccess: (res) => {
       localStorage.setItem("token", res.token);
       queryClient.setQueryData(["user"], () => res.user);
@@ -40,8 +41,8 @@ export function useLogin() {
   }
 
   if (error && isValidationError(error)) {
-    err = error.errors[0].message || "Email ou mot de passe invalid";
+    err = error.errors[0].message || "Champ(s) invalid";
   }
 
-  return { login: mutate, error: err, isLoading };
+  return { register: mutate, error: err, isLoading };
 }

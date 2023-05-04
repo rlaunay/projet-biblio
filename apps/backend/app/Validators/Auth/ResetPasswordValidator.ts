@@ -1,7 +1,7 @@
 import { schema, CustomMessages, rules } from "@ioc:Adonis/Core/Validator";
 import type { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 
-export default class RegisterUserValidator {
+export default class ResetPasswordValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   /*
@@ -24,15 +24,9 @@ export default class RegisterUserValidator {
    *    ```
    */
   public schema = schema.create({
-    email: schema.string([
-      rules.maxLength(255),
-      rules.email(),
-      rules.unique({ table: "users", column: "email" }),
-    ]),
     password: schema.string([
       rules.trim(),
       rules.confirmed(),
-      rules.minLength(4),
       rules.maxLength(255),
     ]),
   });
@@ -48,13 +42,5 @@ export default class RegisterUserValidator {
    * }
    *
    */
-  public messages: CustomMessages = {
-    "email.maxLength": "Email trop long (pas dépasser 255 caractères)",
-    "email.email": "Email invalid",
-    "email.unique": "Email déjà utilisé",
-    "password.minLength": "Mot de passe trop court (min 4 caractères)",
-    "password.maxLength":
-      "Mot de passe trop long (pas dépasser 255 caractères)",
-    "password.confirmed": "Confirmation invalid",
-  };
+  public messages: CustomMessages = {};
 }
